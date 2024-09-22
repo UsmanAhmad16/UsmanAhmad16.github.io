@@ -227,20 +227,24 @@ h6 {
 # Hero Section
 --------------------------------------------------------------*/
 #hero {
+  position: relative; /* Added for proper positioning of ::before */
   width: 100%;
   height: 100vh;
-  background: url("../img/hero-bg.jpg") top center;
+  background-image: url("../img/hero-bg.jpg");
+  background-position: center center; /* Changed from top center for better compatibility */
   background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: scroll; /* Default to scroll to avoid issues on iOS */
 }
 
 #hero:before {
   content: "";
   background: rgba(5, 13, 24, 0.3);
   position: absolute;
-  bottom: 0;
   top: 0;
   left: 0;
   right: 0;
+  bottom: 0;
   z-index: 1;
 }
 
@@ -250,42 +254,25 @@ h6 {
   min-width: 300px;
 }
 
-#hero h1 {
-  margin: 0 0 10px 0;
-  font-size: 64px;
-  font-weight: 700;
-  line-height: 56px;
-  color: #fff;
-}
+/* Media Queries */
 
-#hero p {
-  color: #fff;
-  margin-bottom: 50px;
-  font-size: 26px;
-  font-family: "Poppins", sans-serif;
-}
-
-#hero p span {
-  color: #fff;
-  padding-bottom: 4px;
-  letter-spacing: 1px;
-  border-bottom: 3px solid #149ddd;
-}
-
+/* Retain background-attachment: fixed only for large screens */
 @media (min-width: 1024px) {
   #hero {
     background-attachment: fixed;
   }
 }
 
+/* For mobile devices, use a different background image without fixed attachment */
 @media (max-width: 768px) {
   #hero h1 {
     font-size: 28px;
     line-height: 36px;
   }
   #hero {
-    background-attachment: fixed;
     background-image: url("../img/hero1-bg.jpg");
+    background-attachment: scroll; /* Ensure attachment is scroll */
+    background-position: center center; /* Consistent positioning */
   }
   #hero h2 {
     font-size: 18px;
@@ -293,6 +280,7 @@ h6 {
     margin-bottom: 30px;
   }
 }
+
 
 /*--------------------------------------------------------------
 # Sections General
